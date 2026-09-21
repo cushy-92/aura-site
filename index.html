@@ -1,1 +1,794 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Аура — благотворительный фонд. Помощь, которая рядом.">
+  <title>аура. — благотворительный фонд</title>
 
+  <style>
+    :root {
+      --bg: #eeeee9;
+      --text: #111111;
+      --muted: #6d6d67;
+      --line: #d5d5cf;
+      --lime: #c8ff45;
+      --white: #ffffff;
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 14px;
+    }
+
+    nav a {
+      transition: opacity .2s;
+    }
+
+    nav a:hover {
+      opacity: .55;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-dark {
+      background: var(--text);
+      color: var(--white);
+    }
+
+    .btn-lime {
+      background: var(--lime);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 105px 0 90px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      max-width: 1000px;
+      font-size: clamp(64px, 9vw, 128px);
+      line-height: .88;
+      letter-spacing: -0.075em;
+      font-weight: 800;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--muted);
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+      margin-top: 70px;
+    }
+
+    .hero-text {
+      max-width: 440px;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    section {
+      padding: 100px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: .95;
+      letter-spacing: -.06em;
+      max-width: 700px;
+    }
+
+    .section-number {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .stat {
+      background: var(--bg);
+      padding: 45px 35px;
+    }
+
+    .stat-number {
+      font-size: clamp(48px, 6vw, 82px);
+      font-weight: 800;
+      letter-spacing: -.06em;
+      margin-bottom: 12px;
+    }
+
+    .stat-text {
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-large {
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+
+    .about-small {
+      max-width: 430px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .project {
+      min-height: 430px;
+      padding: 30px;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .project:nth-child(1) {
+      background: #d9ff72;
+    }
+
+    .project:nth-child(2) {
+      background: #d8d8d2;
+    }
+
+    .project:nth-child(3) {
+      background: #191919;
+      color: white;
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      opacity: .7;
+    }
+
+    .project h3 {
+      font-size: 42px;
+      line-height: .95;
+      letter-spacing: -.05em;
+      max-width: 300px;
+    }
+
+    .project p {
+      margin-top: 20px;
+      max-width: 300px;
+      opacity: .7;
+    }
+
+    .quote {
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      background: var(--text);
+      color: white;
+    }
+
+    .quote blockquote {
+      max-width: 1050px;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .quote cite {
+      display: block;
+      margin-top: 35px;
+      font-size: 14px;
+      color: #999;
+      font-style: normal;
+      letter-spacing: 0;
+    }
+
+    .report {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .report-text {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 500px;
+    }
+
+    .report-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .report-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .report-row span:last-child {
+      color: var(--muted);
+    }
+
+    .cta {
+      padding: 120px 0;
+      background: var(--lime);
+      border-top: 0;
+    }
+
+    .cta h2 {
+      max-width: 850px;
+      font-size: clamp(55px, 8vw, 110px);
+      line-height: .88;
+      letter-spacing: -.07em;
+      margin-bottom: 45px;
+    }
+
+    footer {
+      padding: 35px 0;
+      background: var(--text);
+      color: white;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .footer-muted {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .menu {
+      display: none;
+      background: transparent;
+      font-size: 25px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.55);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      position: relative;
+      width: min(500px, 100%);
+      padding: 45px;
+      background: var(--bg);
+      border-radius: var(--radius);
+    }
+
+    .modal-box h2 {
+      font-size: 44px;
+      line-height: .95;
+      letter-spacing: -.05em;
+      margin-bottom: 30px;
+    }
+
+    .close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: transparent;
+      font-size: 30px;
+    }
+
+    .amounts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .amounts button {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: transparent;
+    }
+
+    .amounts button.active {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    .custom-amount {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: transparent;
+      margin-bottom: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .full {
+      width: 100%;
+    }
+
+    .modal-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 800px) {
+      nav {
+        display: none;
+      }
+
+      .menu {
+        display: block;
+      }
+
+      .header-button {
+        display: none;
+      }
+
+      .hero {
+        padding: 70px 0;
+      }
+
+      .hero-bottom,
+      .section-head,
+      .about-grid,
+      .report {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stats,
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .project {
+        min-height: 350px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .quote {
+        min-height: 500px;
+      }
+
+      .modal-box {
+        padding: 35px 25px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="#" class="logo">аура.</a>
+
+    <nav>
+      <a href="#about">О фонде</a>
+      <a href="#projects">Проекты</a>
+      <a href="#stories">Истории</a>
+      <a href="#reports">Отчётность</a>
+    </nav>
+
+    <button class="btn btn-dark header-button" data-donate>Помочь</button>
+    <button class="menu" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">БЛАГОТВОРИТЕЛЬНЫЙ ФОНД</p>
+
+      <h1>
+        Помощь,<br>
+        <em>которая</em> рядом.
+      </h1>
+
+      <div class="hero-bottom">
+        <p class="hero-text">
+          Мы объединяем людей и ресурсы, чтобы поддержка была доступной
+          тем, кому она нужна именно сейчас.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn btn-dark" data-donate>Помочь фонду ↗</button>
+          <a class="btn" href="#about">Узнать больше ↓</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number">1 240+</div>
+          <div class="stat-text">человек получили помощь</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-number">38</div>
+          <div class="stat-text">реализованных проектов</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-number">4,8 млн ₽</div>
+          <div class="stat-text">направлено на помощь</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">01 — О ФОНДЕ</p>
+          <h2 class="section-title">Делаем помощь человеческой.</h2>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <p class="about-large">
+          Иногда человеку нужна не большая система,
+          а просто кто-то, кто окажется рядом вовремя.
+        </p>
+
+        <p class="about-small">
+          «Аура» поддерживает людей в сложных жизненных обстоятельствах,
+          помогает социальным инициативам и создаёт проекты,
+          которые меняют повседневную жизнь к лучшему.
+          Мы верим в прозрачность, уважение и конкретные действия.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">02 — ПРОЕКТЫ</p>
+          <h2 class="section-title">Помощь в разных формах.</h2>
+        </div>
+      </div>
+
+      <div class="projects">
+
+        <article class="project">
+          <div class="project-top">
+            <span>01</span>
+            <span>ПОДДЕРЖКА</span>
+          </div>
+
+          <div>
+            <h3>Адресная помощь</h3>
+            <p>
+              Поддержка людей и семей, оказавшихся в сложной ситуации.
+            </p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top">
+            <span>02</span>
+            <span>СООБЩЕСТВА</span>
+          </div>
+
+          <div>
+            <h3>Рядом с людьми</h3>
+            <p>
+              Помогаем локальным инициативам и волонтёрским сообществам.
+            </p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top">
+            <span>03</span>
+            <span>БУДУЩЕЕ</span>
+          </div>
+
+          <div>
+            <h3>Новые возможности</h3>
+            <p>
+              Создаём программы, которые помогают людям двигаться дальше.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="quote" id="stories">
+    <div class="container">
+      <blockquote>
+        «Большие изменения начинаются
+        с маленького действия.»
+        <cite>— команда фонда «Аура»</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section id="reports">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">03 — ОТЧЁТНОСТЬ</p>
+          <h2 class="section-title">Мы открыты о том, куда идут средства.</h2>
+        </div>
+      </div>
+
+      <div class="report">
+        <p class="report-text">
+          Для нас важно, чтобы каждый человек мог понять,
+          как работает фонд и на что направляются пожертвования.
+          Здесь будут размещаться отчёты и документы фонда.
+        </p>
+
+        <div class="report-list">
+          <div class="report-row">
+            <span>Годовой отчёт</span>
+            <span>Скоро ↗</span>
+          </div>
+
+          <div class="report-row">
+            <span>Финансовая отчётность</span>
+            <span>Скоро ↗</span>
+          </div>
+
+          <div class="report-row">
+            <span>Результаты проектов</span>
+            <span>Скоро ↗</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <p class="eyebrow">ПОДДЕРЖАТЬ</p>
+
+      <h2>
+        Иногда достаточно
+        просто быть рядом.
+      </h2>
+
+      <button class="btn btn-dark" data-donate>
+        Сделать пожертвование ↗
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="logo">аура.</div>
+      <div class="footer-muted">Благотворительный фонд</div>
+    </div>
+
+    <div class="footer-muted">
+      © 2026 «Аура»
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="donateModal" aria-hidden="true">
+  <div class="modal-box">
+
+    <button class="close" data-close aria-label="Закрыть">×</button>
+
+    <p class="eyebrow">ПОДДЕРЖАТЬ АУРУ</p>
+
+    <h2>Выберите сумму</h2>
+
+    <div class="amounts">
+      <button>100 ₽</button>
+      <button>500 ₽</button>
+      <button>1 000 ₽</button>
+      <button>5 000 ₽</button>
+    </div>
+
+    <input
+      class="custom-amount"
+      placeholder="Другая сумма"
+      inputmode="numeric"
+    >
+
+    <button class="btn btn-dark full">
+      Перейти к оплате ↗
+    </button>
+
+    <p class="modal-note">
+      На этом этапе это демонстрационная форма.
+      Платёжный сервис можно подключить позже.
+    </p>
+
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('donateModal');
+
+  document.querySelectorAll('[data-donate]').forEach(button => {
+    button.addEventListener('click', () => {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+    });
+  });
+
+  document.querySelector('[data-close]').addEventListener('click', () => {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  });
+
+  modal.addEventListener('click', event => {
+    if (event.target === modal) {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  document.querySelectorAll('.amounts button').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.amounts button').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      button.classList.add('active');
+
+      document.querySelector('.custom-amount').value =
+        button.textContent.replace('₽', '').trim();
+    });
+  });
+
+  document.querySelector('.menu').addEventListener('click', () => {
+    document.querySelector('nav').classList.toggle('mobile-open');
+  });
+</script>
+
+</body>
+</html>
