@@ -502,11 +502,3 @@ footer {
     align-items: flex-start;
   }
 }
-
-
-.logo-image {
-  display: block;
-  width: 82px;
-  height: auto;
-  object-fit: contain;
-}
